@@ -1,0 +1,68 @@
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+material-button {
+    border-radius: 4px;
+    height: 49px !important;
+    margin: 8px 0 !important;
+    max-width: 300px;
+    width: 100%;
+}
+
+.btn-google {
+    height: 40px;
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.54);
+    text-transform: none;
+    display: inline-block;
+    text-align: left;
+}
+
+material-button.is-disabled {
+    opacity: .5;
+}
+
+.btn-google img {
+    display: inline-block;
+    margin-right: 16px;
+}
+
+.btn-google ::ng-deep .content {
+    padding: 16px !important;
+}
+
+.btn-fb {
+    background-color: #4267B2;
+}
+
+.btn-fb ::ng-deep .content {
+    padding: 8px 10px 6px 11px;
+}
+
+material-checkbox {
+    margin: 0 0 4px !important;
+    background: url('assets/check_false.svg') no-repeat left center;
+}
+
+material-checkbox[aria-checked='true'] {
+    background: url('assets/check_true.svg') no-repeat left center;
+}
+
+material-checkbox ::ng-deep .icon-container {
+    visibility: hidden;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 32px;
+}
+
+a {
+    color: #0091FB !important;
+}

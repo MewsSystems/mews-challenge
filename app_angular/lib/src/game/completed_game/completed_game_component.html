@@ -1,0 +1,108 @@
+<div class="congrats">
+    <img src="assets/congrats.png" height="47px"/>
+</div>
+<h2>Good job<br>{{userFirstName}}!</h2>
+
+<p class="finish-text">You've finished our test with score:</p>
+
+<div class="score">{{game.rightAnswerCount}}/{{game.questionCount}}</div>
+
+<div class="time">In time: {{time}}</div>
+
+<div [ngSwitch]="game.resultType.toString()">
+    <div class="card" *ngSwitchCase="'ResultType.designEagleEye'">
+        <img src="assets/result-eagle.png" width="72px">
+        <h3>EAGLE EYE!</h3>
+
+        <p>Looks like you know everything but did you know we have open positions? Check them out
+            <a href="https://www.workable.com/j/D00CF6F801" target="_blank">here</a>
+            and come see us at our booth in the Gallery, we've got something for you.</p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.designSuperstar'">
+        <img src="assets/result-superstar.png" width="72px">
+        <h3>Superstar!</h3>
+
+        <p>Looks like you know a lot but did you know we have open positions? Check them out
+            <a href="https://www.workable.com/j/D00CF6F801" target="_blank">here</a>
+            and come see us at our booth in the Gallery, we've got something for you.</p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.designNotBad'">
+        <img src="assets/result-not-bad.png" width="72px">
+        <h3>Not bad... not bad...</h3>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.designNotGreat'">
+        <img src="assets/result-not-great.png" width="72px">
+        <h3>Not great, not terrible</h3>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.robot'">
+        <img src="assets/result-robot.png" width="72px">
+        <h3>ROBOT ALERT!</h3>
+
+        <p>Looks like you know everything but did you know we have open positions? Check them out
+            <a href="https://github.com/MewsSystems/developers" target="_blank">here</a>
+            and come see us at our booth in the Gallery, we've got something for you.</p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.superstar'">
+        <img src="assets/result-superstar.png" width="72px">
+        <h3>Superstar!</h3>
+
+        <p>Looks like you know a lot but did you know we have open positions? Check them out
+            <a href="https://github.com/MewsSystems/developers" target="_blank">here</a>
+            and come see us at our booth in the Gallery, we've got something for you.</p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.notBad'">
+        <img src="assets/result-not-bad.png" width="72px">
+        <h3>Not bad...</h3>
+
+        <p>Check out our <a href="https://github.com/MewsSystems/developers" target="_blank">GitHub</a>
+            for more information on how it is to be a Mewser. And come say hi to our booth in the Gallery,
+            we've got something for you.
+        </p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.frontend'">
+        <p>Looks like you’re a JavaScript fan. Wanna do
+            <a href="https://mews-systems.workable.com/j/02C70D4EE1?viewed=true" target="_blank">frontend</a>
+            in Mews? </p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.backend'">
+        <p>Looks like you’re a C# fan. Wanna do
+            <a href="https://mews-systems.workable.com/j/A351B0CD2C?viewed=true" target="_blank">backend</a>
+            in Mews? </p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.data'">
+        <p>Looks like you’re a data fan. Wanna work with
+            <a href="https://mews-systems.workable.com/j/1591AF3922?viewed=true" target="_blank">data</a>
+            in Mews? </p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.mobile'">
+        <p>Looks like you’re a mobile fan. Let’s keep in touch at
+            <a href="mailto:jobs@mewssystems.com">jobs@mewssystems.com</a></p>
+    </div>
+
+    <div class="card" *ngSwitchCase="'ResultType.other'">
+        <p>Yeah, we made it tricky but maybe some parts were good? Check out our
+            <a href="https://github.com/MewsSystems/developers" target="_blank">GitHub</a>
+            for more. And come say hi to our booth in the Gallery, we've got something for you.
+        </p>
+    </div>
+</div>
+
+<h2 class="winners-title">For the winners</h2>
+
+<div class="winner-card">
+    <img src="assets/winner.png" width="100%">
+
+    <p>We will announce the winners (fastest and most accurate) on Saturday at 15:00 at our booth.
+        Winner in each game will get a voucher for one hour of jacuzzi in hotel
+        <a href="https://www.emblemprague.com/homepage" target="_blank">Emblem</a>.</p>
+</div>

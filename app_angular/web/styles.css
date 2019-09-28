@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,600);
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:600&display=swap');
+
+body {
+  margin: 0;
+  background: #101b2c;
+  color: #c0c5cd;
+}
+
+.game-body {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px 20px;
+}
+
+.results-body {
+  padding: 72px;
+}
+
+h1 {
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+* {
+  font-family: 'Montserrat', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.top-bar {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.about-us {
+  margin-left: 24px;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.logo {
+  width: 24px;
+  height: 32px;
+  display: block;
+  background: url("assets/basic-logo.svg") no-repeat center center;
+  background-size: cover;
+}
+
+.user {
+  flex-grow: 1;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #969fab;
+  display: inline-block;
+  text-transform: none !important;
+}
+
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a {
+  color: #0091FB;
+}
+
+.winner-card {
+  border-radius: 8px;
+  box-shadow: 0 15px 24px -6px rgba(16, 27, 44, 0.1), 0 -5px 24px -6px rgba(16, 27, 44, 0.15);
+  background-color: #fff;
+  margin: 24px 0;
+}
+
+.winner-card p {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 21px;
+  letter-spacing: normal;
+  color: #101B2C !important;
+  padding: 16px;
+}
+
+.winners-title {
+  margin-top: 32px !important;
+  font-size: 24px !important;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loading-list {
+  text-align: center;
+  margin: 24px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.game-list-description {
+  color: #969FAB;
+}
+
+.blue-button {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding: 0 16px !important;
+}

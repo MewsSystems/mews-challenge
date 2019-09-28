@@ -1,0 +1,17 @@
+<div class="tag" *ngIf="question.tag != null">
+    <div [class]="tagClass">{{question.tag}}</div>
+</div>
+
+<h2 class="question-title">{{question.title}}</h2>
+
+<div *ngIf="question.code != null" class="code">{{question.code}}</div>
+
+<div class="answers">
+    <div *ngFor="let answer of question.answers">
+        <material-button class="button" (trigger)="answerQuestion(answer.id)">
+            <img *ngIf="imageUrls[question.id] != null && imageUrls[question.id][answer.id] != null"
+                 [src]="imageUrls[question.id][answer.id]">
+            <div class="answer-text">{{answer.text}}</div>
+        </material-button>
+    </div>
+</div>

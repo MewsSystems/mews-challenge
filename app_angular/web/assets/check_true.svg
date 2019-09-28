@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Elements/Forms/Checkbox/Core/option unchecked</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2_signin_2" transform="translate(-40.000000, -185.000000)" fill-rule="nonzero">
+            <g id="Elements/Forms/Checkbox/Core/option-checked" transform="translate(40.000000, 185.000000)">
+                <rect id="Rectangle-2-Copy" fill="#0091FB" x="0" y="0" width="24" height="24" rx="4"></rect>
+                <g id="Basics/Iconography/New/done" transform="translate(3.000000, 3.000000)" fill="#FFFFFF">
+                    <path d="M2.71403883,8.53596117 C2.45775726,8.27967961 2.04224274,8.27967961 1.78596117,8.53596117 C1.52967961,8.79224274 1.52967961,9.20775726 1.78596117,9.46403883 L6.28596117,13.9640388 C6.54224274,14.2203204 6.95775726,14.2203204 7.21403883,13.9640388 L16.2140388,4.96403883 C16.4703204,4.70775726 16.4703204,4.29224274 16.2140388,4.03596117 C15.9577573,3.77967961 15.5422427,3.77967961 15.2859612,4.03596117 L6.75,12.5719223 L2.71403883,8.53596117 Z" id="Path-6"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

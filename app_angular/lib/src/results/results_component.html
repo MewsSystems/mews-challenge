@@ -1,0 +1,43 @@
+<div class="results-wrapper">
+    <div class="top-bar">
+        <div class="logo logo--big"></div>
+
+        <h1>Leaderboard</h1>
+    </div>
+
+    <div class="board">
+        <div class="game">
+            <h2>💻 Developer game</h2>
+
+            <table>
+                <tr *ngFor="let result of developerResults | async; let i = index" [class]="'row-' + (i+1).toString()">
+                    <td>
+                        <span *ngIf="i == 0">🥇</span>
+                        <span *ngIf="i == 1">🥈</span>
+                        <span *ngIf="i == 2">🥉</span>
+                        <span *ngIf="i > 2">{{i+1}}.</span>
+                        {{result.name}}
+                    </td>
+                    <td>{{result.rightAnswerCount}}/{{result.questionCount}} {{result.durationString}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="game">
+            <h2>🖌 Design game</h2>
+
+            <table>
+                <tr *ngFor="let result of designResults | async; let i = index" [class]="'row-' + (i+1).toString()">
+                    <td>
+                        <span *ngIf="i == 0">🥇</span>
+                        <span *ngIf="i == 1">🥈</span>
+                        <span *ngIf="i == 2">🥉</span>
+                        <span *ngIf="i > 2">{{i+1}}.</span>
+                        {{result.name}}
+                    </td>
+                    <td>{{result.rightAnswerCount}}/{{result.questionCount}} {{result.durationString}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

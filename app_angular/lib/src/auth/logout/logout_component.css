@@ -1,0 +1,53 @@
+.dialog-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(16, 27, 44, 0.95);
+    left: 0;
+    top: 0;
+}
+
+.dialog {
+    border-radius: 8px;
+    box-shadow: 0 15px 24px -6px rgba(16, 27, 44, 0.1), 0 -5px 24px -6px rgba(16, 27, 44, 0.15);
+    background-color: #fff;
+    margin: 24px 0;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 70%;
+    width: 300px;
+    padding: 24px;
+}
+
+.close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #101B2C;
+    margin-top: 0;
+}
+
+p {
+    color: #101B2C;
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.button {
+    background: #0091fb;
+    color: white;
+    text-transform: none;
+    height: 40px;
+    border-radius: 8px !important;
+    padding: 0 12px;
+    margin-left: 0 !important;
+    display: block;
+}

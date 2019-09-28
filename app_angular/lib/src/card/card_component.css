@@ -1,0 +1,34 @@
+.wrapper {
+    border-radius: 8px;
+    box-shadow: 0 15px 24px -6px rgba(16, 27, 44, 0.1), 0 -5px 24px -6px rgba(16, 27, 44, 0.15);
+    background-color: #fff;
+    margin: 32px 0;
+    padding: 24px;
+    color: #4c5c70;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #101b2c;
+}
+
+.description {
+    color: #4c5c70;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.button {
+    background: #0091fb;
+    color: white;
+    text-transform: none;
+    height: 40px;
+    border-radius: 8px !important;
+    margin-left: 0 !important;
+}
+
+.button-row {
+    margin-top: 24px;
+    text-align: left;
+}

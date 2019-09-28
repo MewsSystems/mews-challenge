@@ -1,0 +1,10 @@
+<div *ngIf="question != null">
+    <div class="question-header">
+        <div class="question-position">Question {{question.position}}/{{game.questionCount}}</div>
+        <div class="timer">{{timer | async}}</div>
+    </div>
+
+    <current-question [question]="question"></current-question>
+</div>
+
+<div *ngIf="question == null" class="loader">Loading...</div>

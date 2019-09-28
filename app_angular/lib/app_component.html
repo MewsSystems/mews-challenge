@@ -1,0 +1,30 @@
+<div *ngIf="showResults" class="results-body">
+    <results></results>
+</div>
+
+<div *ngIf="!showResults" class="game-body">
+    <div class="top-bar">
+        <a href="/" class="logo"></a>
+
+        <a href="https://mewssystems.com" target="_blank" class="about-us">About us</a>
+
+        <div class="user" *ngIf="user != null">
+            <material-button (trigger)="logout()" class="user-name">
+                <img class="user-avatar" [src]="user.photoURL">
+                {{name}}
+            </material-button>
+        </div>
+    </div>
+
+    <login *ngIf="showLogin"></login>
+
+    <game-list *ngIf="showGameSelector"></game-list>
+
+    <new-game *ngIf="currentGameId != null && currentGame == null && !showLogin" [gameId]="currentGameId"></new-game>
+
+    <current-game *ngIf="gameInProgress != null" [game]="gameInProgress"></current-game>
+
+    <completed-game *ngIf="gameCompleted != null" [game]="gameCompleted"></completed-game>
+
+    <logout [onClose]="closeLogoutDialog" *ngIf="showLogoutDialog"></logout>
+</div>

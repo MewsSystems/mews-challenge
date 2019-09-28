@@ -1,0 +1,56 @@
+.logo--big {
+    width: 56px;
+    height: 75px;
+    margin-right: 32px;
+}
+
+h1 {
+    flex-grow: 1;
+    font-size: 48px;
+    color: #fff;
+    line-height: 58px;
+    margin: 0;
+}
+
+.top-bar {
+    margin-bottom: 105px;
+    display: flex;
+    align-items: center;
+}
+
+.board {
+    display: flex;
+}
+
+.game {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+h2 {
+    font-size: 36px;
+    color: #fff;
+    margin: 0 0 60px;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    color: #fff;
+    font-size: 24px;
+}
+
+td {
+    padding-bottom: 12px;
+    font-weight: 500;
+}
+
+.row-1 {
+    font-size: 48px;
+}
+
+.row-2, .row-3 {
+    font-size: 36px;
+}

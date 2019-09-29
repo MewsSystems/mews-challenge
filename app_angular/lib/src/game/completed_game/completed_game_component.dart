@@ -8,6 +8,7 @@ import 'package:core/core.dart';
   styleUrls: ['completed_game_component.css'],
   directives: [NgIf, MaterialButtonComponent, NgSwitch, NgSwitchWhen],
   pipes: [commonPipes],
+  exports: [ResultType],
 )
 class CompletedGameComponent {
   CompletedGameComponent(this._authService);

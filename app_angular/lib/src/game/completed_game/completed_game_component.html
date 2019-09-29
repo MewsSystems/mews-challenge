@@ -9,8 +9,8 @@
 
 <div class="time">In time: {{time}}</div>
 
-<div [ngSwitch]="game.resultType.toString()">
-    <div class="card" *ngSwitchCase="'ResultType.designEagleEye'">
+<div [ngSwitch]="game.resultType">
+    <div class="card" *ngSwitchCase="ResultType.designEagleEye">
         <img src="assets/result-eagle.png" width="72px">
         <h3>EAGLE EYE!</h3>
 
@@ -19,7 +19,7 @@
             and come see us at our booth in the Gallery, we've got something for you.</p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.designSuperstar'">
+    <div class="card" *ngSwitchCase="ResultType.designSuperstar">
         <img src="assets/result-superstar.png" width="72px">
         <h3>Superstar!</h3>
 
@@ -28,17 +28,17 @@
             and come see us at our booth in the Gallery, we've got something for you.</p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.designNotBad'">
+    <div class="card" *ngSwitchCase="ResultType.designNotBad">
         <img src="assets/result-not-bad.png" width="72px">
         <h3>Not bad... not bad...</h3>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.designNotGreat'">
+    <div class="card" *ngSwitchCase="ResultType.designNotGreat">
         <img src="assets/result-not-great.png" width="72px">
         <h3>Not great, not terrible</h3>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.robot'">
+    <div class="card" *ngSwitchCase="ResultType.robot">
         <img src="assets/result-robot.png" width="72px">
         <h3>ROBOT ALERT!</h3>
 
@@ -47,7 +47,7 @@
             and come see us at our booth in the Gallery, we've got something for you.</p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.superstar'">
+    <div class="card" *ngSwitchCase="ResultType.superstar">
         <img src="assets/result-superstar.png" width="72px">
         <h3>Superstar!</h3>
 
@@ -56,7 +56,7 @@
             and come see us at our booth in the Gallery, we've got something for you.</p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.notBad'">
+    <div class="card" *ngSwitchCase="ResultType.notBad">
         <img src="assets/result-not-bad.png" width="72px">
         <h3>Not bad...</h3>
 
@@ -66,30 +66,30 @@
         </p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.frontend'">
+    <div class="card" *ngSwitchCase="ResultType.frontend">
         <p>Looks like you’re a JavaScript fan. Wanna do
             <a href="https://mews-systems.workable.com/j/02C70D4EE1?viewed=true" target="_blank">frontend</a>
             in Mews? </p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.backend'">
+    <div class="card" *ngSwitchCase="ResultType.backend">
         <p>Looks like you’re a C# fan. Wanna do
             <a href="https://mews-systems.workable.com/j/A351B0CD2C?viewed=true" target="_blank">backend</a>
             in Mews? </p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.data'">
+    <div class="card" *ngSwitchCase="ResultType.data">
         <p>Looks like you’re a data fan. Wanna work with
             <a href="https://mews-systems.workable.com/j/1591AF3922?viewed=true" target="_blank">data</a>
             in Mews? </p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.mobile'">
+    <div class="card" *ngSwitchCase="ResultType.mobile">
         <p>Looks like you’re a mobile fan. Let’s keep in touch at
             <a href="mailto:jobs@mewssystems.com">jobs@mewssystems.com</a></p>
     </div>
 
-    <div class="card" *ngSwitchCase="'ResultType.other'">
+    <div class="card" *ngSwitchCase="ResultType.other">
         <p>Yeah, we made it tricky but maybe some parts were good? Check out our
             <a href="https://github.com/MewsSystems/developers" target="_blank">GitHub</a>
             for more. And come say hi to our booth in the Gallery, we've got something for you.

@@ -31,6 +31,8 @@ class Question {
     this.answer,
     this.code,
     this.tag,
+    this.rightAnswer,
+    this.explanation,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) =>
@@ -43,6 +45,8 @@ class Question {
   final String answer;
   final String code;
   final String tag;
+  final String rightAnswer;
+  final String explanation;
 
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 }

@@ -3,7 +3,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:app_angular/src/game/app_game_service.dart';
+import 'package:app_angular/src/common/code_formatter_pipe.dart';
 import 'package:core/core.dart';
 import 'package:firebase/firebase.dart';
 
@@ -18,26 +18,23 @@ class Image {
   selector: 'current-question',
   templateUrl: 'current_question_component.html',
   styleUrls: ['current_question_component.css'],
-  pipes: [commonPipes],
+  pipes: [commonPipes, CodeFormatterPipe],
   directives: [NgIf, NgFor, MaterialButtonComponent],
 )
 class CurrentQuestionComponent implements AfterChanges {
-  CurrentQuestionComponent(
-    this._gameService,
-    this._authService,
-    this._appGameService,
-  );
+  CurrentQuestionComponent(this._gameService, this._authService);
 
   final GameService _gameService;
   final AuthService _authService;
-  final AppGameService _appGameService;
 
   @Input()
   Question question;
 
+  @Input()
+  String gameId;
+
   Future<void> answerQuestion(String answerId) async {
     final userId = (await _authService.user.first).uid;
-    final gameId = _appGameService.currentGameId.value;
     final questionId = question.id;
     querySelector('html').scrollTop = 0;
     await _gameService.answerQuestion(userId, gameId, questionId, answerId);

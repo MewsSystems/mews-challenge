@@ -1,28 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:app_angular/src/main/main_component.template.dart'
-    as main_template;
-import 'package:app_angular/src/results/results_component.template.dart'
-    as results_template;
-
-class RoutePaths {
-  static final root = RoutePath(path: '/');
-  static final results = RoutePath(path: '/results');
-}
-
-class Routes {
-  static final root = RouteDefinition(
-    routePath: RoutePaths.root,
-    component: main_template.AppComponentNgFactory,
-  );
-
-  static final results = RouteDefinition(
-    routePath: RoutePaths.results,
-    component: results_template.ResultsComponentNgFactory,
-  );
-
-  static final all = [root, results];
-}
+import 'package:app_angular/src/route_paths.dart';
+import 'package:app_angular/src/routes.dart';
 
 @Component(
   selector: 'my-app',

@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:app_angular/src/game/app_game_service.dart';
+import 'package:angular_router/angular_router.dart';
+import 'package:app_angular/src/game/route_paths.dart';
 import 'package:core/core.dart';
 
 @Component(
@@ -10,12 +11,12 @@ import 'package:core/core.dart';
   directives: [MaterialButtonComponent],
 )
 class CardComponent {
-  CardComponent(this._appGameService);
+  CardComponent(this._router);
 
   @Input()
   GameState game;
 
-  final AppGameService _appGameService;
+  final Router _router;
 
   String get buttonTitle => game.join(
         (_) => 'Start game',
@@ -24,6 +25,6 @@ class CardComponent {
       );
 
   void startGame() {
-    _appGameService.currentGameId.add(game.id);
+    _router.navigate(RoutePaths.game.toUrl(parameters: {idParam: game.id}));
   }
 }

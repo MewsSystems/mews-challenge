@@ -1,0 +1,7 @@
+<login *ngIf="showLogin"></login>
+
+<new-game *ngIf="gameInProgress == null && gameCompleted == null && currentGameId != null && !showLogin" [gameId]="currentGameId"></new-game>
+
+<current-game *ngIf="gameInProgress != null && !showLogin" [game]="gameInProgress"></current-game>
+
+<completed-game *ngIf="gameCompleted != null && !showLogin" [game]="gameCompleted"></completed-game>

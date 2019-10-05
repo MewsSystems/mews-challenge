@@ -1,8 +1,4 @@
-<div *ngIf="showResults" class="results-body">
-    <results></results>
-</div>
-
-<div *ngIf="!showResults" class="game-body">
+<div class="game-body">
     <div class="top-bar">
         <a href="/" class="logo"></a>
 
@@ -16,15 +12,7 @@
         </div>
     </div>
 
-    <login *ngIf="showLogin"></login>
-
-    <game-list *ngIf="showGameSelector"></game-list>
-
-    <new-game *ngIf="currentGameId != null && currentGame == null && !showLogin" [gameId]="currentGameId"></new-game>
-
-    <current-game *ngIf="gameInProgress != null" [game]="gameInProgress"></current-game>
-
-    <completed-game *ngIf="gameCompleted != null" [game]="gameCompleted"></completed-game>
+    <router-outlet [routes]="Routes.all"></router-outlet>
 
     <logout [onClose]="closeLogoutDialog" *ngIf="showLogoutDialog"></logout>
 </div>

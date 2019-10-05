@@ -71,6 +71,7 @@ GameCompleted _$GameCompletedFromJson(Map<String, dynamic> json) {
         ? null
         : RightAnswersByTags.fromJson(
             json['rightAnswersByTags'] as Map<String, dynamic>),
+    showRightAnswers: json['showRightAnswers'] as bool,
   );
 }
 
@@ -84,4 +85,5 @@ Map<String, dynamic> _$GameCompletedToJson(GameCompleted instance) =>
       'questionCount': instance.questionCount,
       'rightAnswerCount': instance.rightAnswerCount,
       'rightAnswersByTags': instance.rightAnswersByTags,
+      'showRightAnswers': instance.showRightAnswers,
     };

@@ -93,6 +93,7 @@ class GameCompleted extends Game {
     this.questionCount,
     this.rightAnswerCount,
     this.rightAnswersByTags,
+    this.showRightAnswers,
   }) : super(
           id: id,
           title: title,
@@ -113,6 +114,8 @@ class GameCompleted extends Game {
   final int rightAnswerCount;
 
   final RightAnswersByTags rightAnswersByTags;
+
+  final bool showRightAnswers;
 
   Duration get duration => end.difference(start);
 

@@ -61,6 +61,18 @@ class GameService {
         .set({}, SetOptions(merge: true));
   }
 
+  Future<List<Question>> getQuestions(String userId, String gameId) =>
+      firestore()
+          .collection('users')
+          .doc(userId)
+          .collection('games')
+          .doc(gameId)
+          .collection('questions')
+          .orderBy('position')
+          .get()
+          .then((snapshot) =>
+              snapshot.docs.map((d) => Question.fromJson(d.data())).toList());
+
   Stream<Question> getCurrentQuestion(String userId, String gameId) {
     return firestore()
         .collection('users')

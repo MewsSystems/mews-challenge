@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:app_angular/src/auth/login_component.dart';
 import 'package:app_angular/src/game/question/question_component.dart';
 import 'package:app_angular/src/game/route_paths.dart';
 import 'package:core/core.dart';
@@ -9,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
   selector: 'game-answers',
   templateUrl: 'answers_component.html',
   styleUrls: ['answers_component.css'],
-  directives: [NgFor, QuestionComponent],
+  directives: [NgFor, QuestionComponent, LoginComponent, NgIf],
 )
 class AnswersComponent implements OnActivate, OnDeactivate {
   AnswersComponent(this._authService, this._gameService, this._router);
@@ -52,7 +53,10 @@ class AnswersComponent implements OnActivate, OnDeactivate {
       }))
       ..add(_authService.user
           .map((u) => u != null)
-          .listen((isAuthenticated) => showLogin = !isAuthenticated));
+          .listen((isAuthenticated) {
+            showLogin = !isAuthenticated;
+            if (!isAuthenticated) questions = [];
+          }));
   }
 
   @override

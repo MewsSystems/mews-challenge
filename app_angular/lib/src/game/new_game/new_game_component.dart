@@ -14,7 +14,6 @@ class NewGameComponent implements OnInit {
   @Input()
   String gameId;
 
-
   @override
   void ngOnInit() {
     _gameService.startGame(_authService.currentUser.uid, gameId);

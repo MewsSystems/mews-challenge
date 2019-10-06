@@ -163,6 +163,11 @@ async function fillRightAnswers(gameId: string, userId: string) {
         return;
     }
 
+    if (!userGame.data()!.end) {
+        console.info(`Game ${gameId} is not finished for user ${userId}.`);
+        return;
+    }
+
     const game = await db.collection('games')
         .doc(gameId)
         .get()

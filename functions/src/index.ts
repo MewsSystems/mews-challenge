@@ -9,6 +9,10 @@ const db = admin.firestore();
 
 export const onQuestionAnswered = functions.firestore
     .document('users/{userId}/games/{gameId}/questions/{questionId}').onUpdate((async (change, context) => {
+        const before: any = change.before.data() || {};
+        const after: any = change.after.data() || {};
+        if (before.answer === after.answer) return;
+
         const wasFinished = await db.runTransaction(async transaction => {
             const questionsRef = change.after.ref.parent;
             const questions = (await questionsRef.get()).docs.map((d) => d.data());
@@ -155,7 +159,7 @@ async function fillRightAnswers(gameId: string, userId: string) {
 
     const userGame = await userGameRef.get();
     if (!userGame.exists) {
-        console.info(`Game ${gameId} doesn't exist for user ${userId}`);
+        console.info(`Game ${gameId} doesn't exist for user ${userId}.`);
         return;
     }
 
@@ -169,6 +173,7 @@ async function fillRightAnswers(gameId: string, userId: string) {
         return;
     }
 
+    console.info(`Game ${gameId}: filling right answers for user ${userId}.`);
     return db.runTransaction(async tx => {
         const userQuestions = await userGameRef.collection('questions').listDocuments();
 

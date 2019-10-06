@@ -96,3 +96,7 @@
         </p>
     </div>
 </div>
+
+<div *ngIf="showAnswersButton" class="answers-button-wrapper">
+    <material-button (trigger)="showRightAnswers()">See right answers</material-button>
+</div>

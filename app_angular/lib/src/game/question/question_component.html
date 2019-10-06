@@ -8,7 +8,12 @@
 
 <div class="answers">
     <div *ngFor="let answer of question.answers">
-        <material-button class="button" (trigger)="answerQuestion(answer.id)">
+        <material-button
+                class="button"
+                [class.isRight]="question.isRightAnswer(answer)"
+                [class.isWrong]="question.isWrongUserAnswer(answer)"
+                (trigger)="answerQuestion(answer.id)"
+        >
             <img *ngIf="imageUrls[question.id] != null && imageUrls[question.id][answer.id] != null"
                  [src]="imageUrls[question.id][answer.id]">
             <div class="answer-text">{{answer.text | formatCode}}</div>

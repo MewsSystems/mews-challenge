@@ -48,5 +48,13 @@ class Question {
   final String rightAnswer;
   final String explanation;
 
+  bool isRightAnswer(Answer answer) =>
+      rightAnswer != null && rightAnswer == answer.id;
+
+  bool isWrongUserAnswer(Answer answer) =>
+      rightAnswer != null &&
+      this.answer == answer.id &&
+      this.answer != rightAnswer;
+
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 }

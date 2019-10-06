@@ -1,3 +1,7 @@
-<p>
-    ANSWERS
-</p>
+<div *ngFor="let question of questions">
+    <question [question]="question"></question>
+    <div class="explanation">
+        <h2>Explanation</h2>
+        <p>{{question.explanation}}</p>
+    </div>
+</div>

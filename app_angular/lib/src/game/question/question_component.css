@@ -1,0 +1,93 @@
+.question-title {
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.code {
+    color: #FFF;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: pre;
+}
+
+.tag > div {
+    margin-top: 8px;
+    padding: 3px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+    display: inline-block;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.tag .JS {
+    color: #493508;
+    background-color: #FFDD56;
+}
+
+.tag .Data {
+    color: #400A06;
+    background-color: #E87067;
+}
+
+.tag .CS {
+    color: #0A2652;
+    background-color: #4DB2FC;
+}
+
+.tag .Dart {
+    color: #063D0B;
+    background-color: #57D56B;
+}
+
+.answers material-button {
+    display: block;
+    min-height: 56px;
+    border-radius: 8px !important;
+    font-size: 16px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    color: #0F1A2B;
+    text-align: left;
+    vertical-align: middle;
+    margin: 16px 0 !important;
+    line-height: 24px;
+
+    box-shadow: 0 15px 24px -6px rgba(16, 27, 44, 0.1), 0 -5px 24px -6px rgba(16, 27, 44, 0.15);
+    background-color: #fff;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.answers material-button ::ng-deep .content {
+    padding: 16px !important;
+}
+
+.answers material-button img {
+    max-width: 100%;
+}
+
+.answers material-button .answer-text {
+    white-space: pre-line;
+}
+
+.answers {
+    margin-top: 32px;
+}
+
+.answers material-button.isRight {
+    box-shadow: 0 0 0 5px #33CC4B;
+}
+
+.answers material-button.isWrong {
+    box-shadow: 0 0 0 4px #D11F17 inset;
+}

@@ -1,0 +1,18 @@
+<div class="game-body">
+    <div class="top-bar">
+        <a href="/" class="logo"></a>
+
+        <a href="https://mewssystems.com" target="_blank" class="about-us">About us</a>
+
+        <div class="user" *ngIf="user != null">
+            <material-button (trigger)="logout()" class="user-name">
+                <img class="user-avatar" [src]="user.photoURL">
+                {{name}}
+            </material-button>
+        </div>
+    </div>
+
+    <router-outlet [routes]="Routes.all"></router-outlet>
+
+    <logout [onClose]="closeLogoutDialog" *ngIf="showLogoutDialog"></logout>
+</div>

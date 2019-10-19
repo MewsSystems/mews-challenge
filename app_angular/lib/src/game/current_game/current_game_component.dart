@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:app_angular/src/game/app_game_service.dart';
 import 'package:app_angular/src/game/current_question/current_question_component.dart';
 import 'package:core/core.dart';
 import 'package:rxdart/rxdart.dart';
@@ -17,7 +16,6 @@ class CurrentGameComponent implements OnInit, OnDestroy {
   CurrentGameComponent(
     this._gameService,
     this._authService,
-    this._appGameService,
   ) {
     timer = Observable.periodic(Duration(seconds: 1), (_) => DateTime.now())
         .startWith(DateTime.now())
@@ -26,7 +24,6 @@ class CurrentGameComponent implements OnInit, OnDestroy {
 
   final GameService _gameService;
   final AuthService _authService;
-  final AppGameService _appGameService;
 
   @Input()
   GameInProgress game;
@@ -42,7 +39,7 @@ class CurrentGameComponent implements OnInit, OnDestroy {
     _subscription = _gameService
         .getCurrentQuestion(
           _authService.currentUser.uid,
-          _appGameService.currentGameId.value,
+          game.id,
         )
         .listen((data) => question = data);
   }

@@ -9,6 +9,10 @@ const db = admin.firestore();
 
 export const onQuestionAnswered = functions.firestore
     .document('users/{userId}/games/{gameId}/questions/{questionId}').onUpdate((async (change, context) => {
+        const before: any = change.before.data() || {};
+        const after: any = change.after.data() || {};
+        if (before.answer === after.answer) return;
+
         const wasFinished = await db.runTransaction(async transaction => {
             const questionsRef = change.after.ref.parent;
             const questions = (await questionsRef.get()).docs.map((d) => d.data());
@@ -28,7 +32,7 @@ export const onQuestionAnswered = functions.firestore
                 questions.forEach((q) => {
                     if (q.answer === (gameQuestions.find(d => d.id === q.id) || {}).rightAnswer) {
                         rightAnswers++;
-                        const key: string = (gameData.type == 0 ? 'DESIGN' : q.tag).toUpperCase();
+                        const key: string = (gameData.type === 0 ? 'DESIGN' : q.tag).toUpperCase();
                         rightAnswersByTags[key] = (rightAnswersByTags[key] || 0) + 1;
                     }
                 });
@@ -53,9 +57,11 @@ export const onQuestionAnswered = functions.firestore
         } catch (e) {
             console.error(e);
         }
+
+        await fillRightAnswers(context.params.gameId, context.params.userId);
     }));
 
-export const onGameCreated = functions.firestore
+export const onUserGameCreated = functions.firestore
     .document('users/{userId}/games/{gameId}').onCreate((async (snapshot, context) =>
         db.runTransaction((async transaction => {
             const gameRef = db.collection('games').doc(context.params.gameId);
@@ -85,11 +91,24 @@ export const onGameCreated = functions.firestore
                         })),
                         position: index + 1,
                         rightAnswer: null,
+                        explanation: null,
                     });
                 }));
 
             return Promise.all(promises);
         }))));
+
+export const onGameUpdated = functions.firestore
+    .document('games/{gameId}').onUpdate(async (change, context) => {
+        const before: any = change.before.data() || {};
+        const after: any = change.after.data() || {};
+        if (!before.showRightAnswers && after.showRightAnswers) {
+            const users = await db.collection('users').get();
+            const promises = users.docs.map(d => d.id).map(id => fillRightAnswers(context.params.gameId, id));
+            return Promise.all(promises);
+        }
+        return null;
+    });
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 
@@ -130,4 +149,53 @@ function getResult(q: DocumentSnapshot, snapshot: DocumentSnapshot): any {
     )(names);
     result.name = [firstName, lastName].join(' ');
     return result;
+}
+
+async function fillRightAnswers(gameId: string, userId: string) {
+    const userGameRef = db.collection('users')
+        .doc(userId)
+        .collection('games')
+        .doc(gameId);
+
+    const userGame = await userGameRef.get();
+    if (!userGame.exists) {
+        console.info(`Game ${gameId} doesn't exist for user ${userId}.`);
+        return;
+    }
+
+    if (!userGame.data()!.end) {
+        console.info(`Game ${gameId} is not finished for user ${userId}.`);
+        return;
+    }
+
+    const game = await db.collection('games')
+        .doc(gameId)
+        .get()
+        .then((d) => d.data());
+
+    if (!game!.showRightAnswers) {
+        console.info(`Game ${gameId} shouldn't show right answers yet.`);
+        return;
+    }
+
+    console.info(`Game ${gameId}: filling right answers for user ${userId}.`);
+    return db.runTransaction(async tx => {
+        const userQuestions = await userGameRef.collection('questions').listDocuments();
+
+        const questions = await db.collection('games')
+            .doc(gameId)
+            .collection('questions')
+            .get()
+            .then(q => q.docs.map(d => d.data()));
+
+        userQuestions.forEach(ref => {
+            const question = questions.find((q) => q.id === ref.id);
+            tx.update(ref, {
+                rightAnswer: question!.rightAnswer,
+                explanation: question!.explanation,
+            });
+        });
+
+        tx.update(userGameRef, {showRightAnswers: true});
+    });
 }

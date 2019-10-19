@@ -4,7 +4,7 @@
         <div class="timer">{{timer | async}}</div>
     </div>
 
-    <current-question [question]="question"></current-question>
+    <current-question [gameId]="game.id" [question]="question"></current-question>
 </div>
 
 <div *ngIf="question == null" class="loader">Loading...</div>

@@ -97,12 +97,6 @@
     </div>
 </div>
 
-<h2 class="winners-title">For the winners</h2>
-
-<div class="winner-card">
-    <img src="assets/winner.png" width="100%">
-
-    <p>We will announce the winners (fastest and most accurate) on Saturday at 15:00 at our booth.
-        Winner in each game will get a voucher for one hour of jacuzzi in hotel
-        <a href="https://www.emblemprague.com/homepage" target="_blank">Emblem</a>.</p>
+<div *ngIf="showAnswersButton" class="answers-button-wrapper">
+    <material-button (trigger)="showRightAnswers()">See right answers</material-button>
 </div>

@@ -23,17 +23,18 @@ class ResultWidget extends StatelessWidget {
               'assets/${data.icon}.png',
               width: 72,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Text(
-                data.title,
-                style: TextStyle(
-                  color: const Color(0xFF101B2C),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+            if (data.title != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  data.title,
+                  style: TextStyle(
+                    color: const Color(0xFF101B2C),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
             // Bug https://github.com/flutter/flutter/issues/39226
             // prevents from clicking the link.
             if (data.text != null)

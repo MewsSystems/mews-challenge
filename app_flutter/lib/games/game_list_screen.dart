@@ -41,7 +41,7 @@ class GameListScreen extends StatelessWidget {
 
   Widget _buildGameCards(BuildContext context) =>
       StreamBuilder<List<GameState>>(
-        stream: Provider.of<GameService>(context).getGames(),
+        stream: Provider.of<GameService>(context).getGames('webexpo2019'),
         initialData: [],
         builder: (context, snapshot) {
           if (snapshot.data.isEmpty) {

@@ -74,6 +74,7 @@ export const onUserGameCreated = functions.firestore
                 title: game.title,
                 description: game.description,
                 type: game.type,
+                eventId: game.eventId,
                 id: context.params.gameId,
                 questionCount: questions.length,
                 start: Timestamp.now(),

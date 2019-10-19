@@ -11,7 +11,7 @@ class GameService {
 
   final AuthService _authService;
 
-  Stream<List<GameState>> getGames() =>
+  Stream<List<GameState>> getGames(String eventId) =>
       Observable(_authService.user.map((u) => u?.uid)).switchMap((userId) {
         final Stream<Iterable<GameState>> userGames = userId == null
             ? Observable.just(<GameState>[])
@@ -19,11 +19,13 @@ class GameService {
                 .collection('users')
                 .doc(userId)
                 .collection('games')
+                .where('eventId', '==', eventId)
                 .onSnapshot
                 .map((s) => s.docs.map(_createGame).where((g) => g != null));
 
         final Stream<Iterable<GameState>> newGames = firestore()
             .collection('games')
+            .where('eventId', '==', eventId)
             .onSnapshot
             .map((s) => s.docs.map(_createNewGame).where((x) => x != null));
 

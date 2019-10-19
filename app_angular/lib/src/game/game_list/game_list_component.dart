@@ -20,13 +20,16 @@ class GameListComponent implements OnInit, OnDestroy {
 
   StreamSubscription _subscription;
 
+  @Input()
+  String eventId;
+
   final GameService _service;
 
   List<GameState> games = [];
 
   @override
   Future<Null> ngOnInit() async {
-    _subscription = _service.getGames().listen((d) => games = d);
+    _subscription = _service.getGames(eventId).listen((d) => games = d);
   }
 
   @override

@@ -3,11 +3,11 @@ import 'package:firebase/firebase.dart';
 import 'result.dart';
 
 class ResultsService {
-  Stream<List<Result>> get developerResults => _results('developer');
+  Stream<List<Result>> get developerResults => results('developer');
 
-  Stream<List<Result>> get designResults => _results('design');
+  Stream<List<Result>> get designResults => results('design');
 
-  Stream<List<Result>> _results(String gameId) => firestore()
+  Stream<List<Result>> results(String gameId) => firestore()
       .collection('results')
       .doc(gameId)
       .collection('results')

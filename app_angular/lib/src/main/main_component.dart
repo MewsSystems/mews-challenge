@@ -5,13 +5,12 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:app_angular/src/auth/login_component.dart';
 import 'package:app_angular/src/auth/logout/logout_component.dart';
-import 'package:app_angular/src/game/routes.dart';
-import 'package:app_angular/src/route_paths.dart';
+import 'package:app_angular/src/main/routes.dart';
 import 'package:core/core.dart';
 import 'package:firebase/firebase.dart';
 
 @Component(
-  selector: 'my-app',
+  selector: 'main',
   templateUrl: 'main_component.html',
   directives: [
     LoginComponent,
@@ -20,11 +19,11 @@ import 'package:firebase/firebase.dart';
     routerDirectives,
     MaterialButtonComponent,
   ],
-  exports: [RoutePaths, Routes],
+  exports: [Routes],
   pipes: [commonPipes],
 )
-class AppComponent implements OnInit, OnDestroy {
-  AppComponent(this._authService);
+class MainComponent implements OnInit, OnDestroy {
+  MainComponent(this._authService);
 
   final AuthService _authService;
   StreamSubscription _subscription;

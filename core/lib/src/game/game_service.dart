@@ -1,15 +1,39 @@
 import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../auth_service.dart';
 import 'game.dart';
 import 'question.dart';
 
+part 'game_service.g.dart';
+
+@JsonSerializable()
+class GameInfo {
+  GameInfo({this.id, this.title});
+
+  final String id;
+  final String title;
+
+  static GameInfo fromJson(Map<String, dynamic> json) =>
+      _$GameInfoFromJson(json);
+}
+
 class GameService {
   GameService(this._authService);
 
   final AuthService _authService;
+
+  Future<List<GameInfo>> getGameInfoForEvent(String eventId) async =>
+      firestore()
+          .collection('games')
+          .where('eventId', '==', eventId)
+          .get()
+          .then((snapshot) => snapshot.docs
+              .map((d) => d.data())
+              .map(GameInfo.fromJson)
+              .toList());
 
   Stream<List<GameState>> getGames(String eventId) =>
       Observable(_authService.user.map((u) => u?.uid)).switchMap((userId) {

@@ -1,9 +1,5 @@
 <div>
     <game-list>
-        <h1>Test your skills!</h1>
-        <p class="game-list-description">Developer? Designer? Playful? Choose your game and show us what you've got! Get
-            it right, get it fast!</p>
-
         <div *ngFor="let item of games">
             <card [game]="item"></card>
         </div>

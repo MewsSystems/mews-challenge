@@ -8,7 +8,7 @@ class Routes {
     RouteDefinition.redirect(
       path: '',
       redirectTo: events_route.RoutePaths.event
-          .toUrl(parameters: {events_route.eventIdParam: 'webexpo2019'}),
+          .toUrl(parameters: {events_route.eventIdParam: 'reactiveconf'}),
     ),
     ...events.Routes.all,
     ...game.Routes.all,

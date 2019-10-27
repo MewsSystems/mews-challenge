@@ -9,6 +9,7 @@ import 'main.template.dart' as self;
   ClassProvider(AuthService),
   ClassProvider(GameService),
   ClassProvider(ResultsService),
+  ClassProvider(EventService),
   routerProvidersHash,
 ])
 final InjectorFactory rootInjector = self.rootInjector$Injector;

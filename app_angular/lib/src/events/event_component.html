@@ -1,0 +1,15 @@
+<h1>Test your skills!</h1>
+
+<p class="game-list-description" *ngIf="event?.description != null">{{event.description}}</p>
+
+<game-list *ngIf="eventId != null" [eventId]="eventId"></game-list>
+
+<div *ngIf="winnersDescription != null">
+    <h2 class="winners-title">For the winners</h2>
+
+    <div class="winner-card">
+        <img src="assets/winner.png" width="100%">
+
+        <p [innerHTML]="winnersDescription"></p>
+    </div>
+</div>

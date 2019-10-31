@@ -134,7 +134,7 @@ class GameCompleted extends Game {
       if (rightAnswersByTags.data == 5) return ResultType.data;
       if (rightAnswersByTags.mobile == 5) return ResultType.mobile;
       return ResultType.other;
-    } else if (id == 'reactiveconf_frontend') {
+    } else if (questionCount == 15) {
       if (rightAnswerCount == 15) return ResultType.robot;
       if (rightAnswerCount >= 11) return ResultType.superstar;
       if (rightAnswerCount >= 8) return ResultType.notBad;

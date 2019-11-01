@@ -16,6 +16,10 @@ class NewGameComponent implements OnInit {
 
   @override
   void ngOnInit() {
-    _gameService.startGame(_authService.currentUser.uid, gameId);
+    // For some reason when called without delayed, startGame function
+    // never ends without any error. Initialization issue?
+    Future.delayed(Duration(seconds: 1)).then((_) {
+      _gameService.startGame(_authService.currentUser.uid, gameId);
+    });
   }
 }

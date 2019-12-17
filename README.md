@@ -1,6 +1,6 @@
 ## Mews Challenge
 
-This is a source code of a game presented at WebExpo 2019 by Mews. You can play 2 games: design game and developer game.
+This is a source code of an app that we’ve used on a number of conferences and events in 2019. You can play one of the games in “designer” or “developer” category.
 
 Design game consists of 20 questions where you're supposed to choose the image with better UI/UX. Each question has 2 possible variants.
 

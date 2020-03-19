@@ -1,4 +1,4 @@
-import 'package:firebase/firebase.dart';
+import 'package:firebase/firebase.dart' hide Query;
 import 'package:firebase/firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:rxdart/rxdart.dart';
@@ -35,36 +35,43 @@ class GameService {
               .map(GameInfo.fromJson)
               .toList());
 
-  Stream<List<GameState>> getGames(String eventId) =>
-      Observable(_authService.user.map((u) => u?.uid)).switchMap((userId) {
-        final Stream<Iterable<GameState>> userGames = userId == null
-            ? Observable.just(<GameState>[])
-            : firestore()
-                .collection('users')
-                .doc(userId)
-                .collection('games')
-                .where('eventId', '==', eventId)
-                .onSnapshot
-                .map((s) => s.docs.map(_createGame).where((g) => g != null));
+  Stream<List<GameState>> getGames(String eventId) {
+    final filterOperator = eventId == null ? '>' : '==';
+    final filterValue = eventId ?? '';
+    return Observable(_authService.user.map((u) => u?.uid)).switchMap((userId) {
+      final Stream<Iterable<GameState>> userGames = userId == null
+          ? Observable.just(<GameState>[])
+          : firestore()
+              .collection('users')
+              .doc(userId)
+              .collection('games')
+              .where('eventId', filterOperator, filterValue)
+              .onSnapshot
+              .map((s) => s.docs.map(_createGame).where((g) => g != null));
 
-        final Stream<Iterable<GameState>> newGames = firestore()
-            .collection('games')
-            .where('eventId', '==', eventId)
-            .onSnapshot
-            .map((s) => s.docs.map(_createNewGame).where((x) => x != null));
+      Query newGamesQuery = firestore()
+          .collection('games')
+          .where('eventId', filterOperator, filterValue);
 
-        return Observable.combineLatest2(
-          userGames,
-          newGames,
-          (Iterable<GameState> userGames, Iterable<GameState> newGames) {
-            final userGameIds = userGames.map((g) => g.id).toList();
-            return [
-              ...userGames,
-              ...newGames.where((g) => !userGameIds.contains(g.id))
-            ];
-          },
-        );
-      });
+      if (eventId == null) {
+        newGamesQuery = newGamesQuery.where('isEventOnly', '==', false);
+      }
+      final Stream<Iterable<GameState>> newGames = newGamesQuery.onSnapshot
+          .map((s) => s.docs.map(_createNewGame).where((x) => x != null));
+
+      return Observable.combineLatest2(
+        userGames,
+        newGames,
+        (Iterable<GameState> userGames, Iterable<GameState> newGames) {
+          final userGameIds = userGames.map((g) => g.id).toList();
+          return [
+            ...userGames,
+            ...newGames.where((g) => !userGameIds.contains(g.id))
+          ];
+        },
+      );
+    });
+  }
 
   Stream<GameState> getGame(String gameId) =>
       Observable(_authService.user.map((u) => u?.uid)).switchMap((userId) {

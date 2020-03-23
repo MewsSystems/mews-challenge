@@ -2,8 +2,12 @@
     <h2>Please login</h2>
 
     <material-checkbox [disabled]="isAuthenticating" themeColor="#0091fb" [(checked)]="consentChecked"></material-checkbox>
-    <p>I consent to receiving follow-up communication from the Mews recruiting team concerning participation results and
-        potential employment opportunities.<br>Read more <a href="https://www.mewssystems.com/privacy" target="_blank">here</a>.
+    <p>I consent to receiving ad-hoc e-mail communication from the Mews team.<br>
+    
+       <span style="font-style: italic; font-size: 14px;">
+           Don't worry, we won't spam you too much! 🙏 <br>
+            In any case, read more <a href="https://www.mews.com/privacy" target="_blank">here</a>.
+       </span>
     </p>
 
     <material-button [disabled]="!consentChecked || isAuthenticating" class="btn-fb" (trigger)="loginFB()">

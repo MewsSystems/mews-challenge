@@ -1,4 +1,5 @@
 import 'package:app_flutter/results/results_bloc.dart';
+import 'package:app_flutter/results/results_state.dart';
 import 'package:core/core.dart';
 import 'package:dfunc/dfunc.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ResultsBloc>(context)
-        .add(ResultsInitialized(widget.eventId));
+    BlocProvider.of<ResultsBloc>(context).onInitialized(widget.eventId);
   }
 
   @override
@@ -67,10 +67,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         stream: results,
         initialData: [],
         builder: (context, snapshot) => Column(
-          children: mapIndexed(
-            (i, r) => _buildResult(i, r),
-            snapshot.data,
-          ).toList(),
+          children: mapIndexed(_buildResult, snapshot.data).toList(),
         ),
       );
 

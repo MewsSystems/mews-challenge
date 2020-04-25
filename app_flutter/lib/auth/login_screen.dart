@@ -13,7 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService authService = Provider.of(context);
+    final authService = Provider.of<AuthService>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

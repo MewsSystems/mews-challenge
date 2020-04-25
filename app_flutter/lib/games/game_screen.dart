@@ -21,7 +21,7 @@ class _GameScreenState extends State<GameScreen>
     with AfterInitMixin<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    final AuthService authService = Provider.of(context);
+    final authService = Provider.of<AuthService>(context);
     return StreamBuilder<User>(
       stream: authService.user,
       initialData: authService.currentUser,

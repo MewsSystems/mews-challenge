@@ -3,6 +3,8 @@ library core;
 import 'package:firebase/firebase.dart';
 
 export 'src/auth_service.dart';
+export 'src/events/event.dart';
+export 'src/events/event_service.dart';
 export 'src/game/game.dart';
 export 'src/game/game_service.dart';
 export 'src/game/question.dart';

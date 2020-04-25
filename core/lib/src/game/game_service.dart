@@ -91,7 +91,7 @@ class GameService {
         .doc(userId)
         .collection('games')
         .doc(gameId)
-        .set({}, SetOptions(merge: true));
+        .set(<String, dynamic>{}, SetOptions(merge: true));
   }
 
   Future<List<Question>> getQuestions(String userId, String gameId) =>
@@ -106,47 +106,45 @@ class GameService {
           .then((snapshot) =>
               snapshot.docs.map((d) => Question.fromJson(d.data())).toList());
 
-  Stream<Question> getCurrentQuestion(String userId, String gameId) {
-    return firestore()
-        .collection('users')
-        .doc(userId)
-        .collection('games')
-        .doc(gameId)
-        .collection('questions')
-        .orderBy('position')
-        .onSnapshot
-        .map((s) => s.docs
-            .map((d) => d.data())
-            .map((d) => Question.fromJson(d))
-            .firstWhere(
-              (q) => q.answer == null,
-              orElse: () => null,
-            ));
-  }
+  Stream<Question> getCurrentQuestion(String userId, String gameId) =>
+      firestore()
+          .collection('users')
+          .doc(userId)
+          .collection('games')
+          .doc(gameId)
+          .collection('questions')
+          .orderBy('position')
+          .onSnapshot
+          .map((s) => s.docs
+              .map((d) => d.data())
+              .map((d) => Question.fromJson(d))
+              .firstWhere(
+                (q) => q.answer == null,
+                orElse: () => null,
+              ));
 
   Future<void> answerQuestion(
     String userId,
     String gameId,
     String questionId,
     String answerId,
-  ) async {
-    return firestore()
-        .collection('users')
-        .doc(userId)
-        .collection('games')
-        .doc(gameId)
-        .collection('questions')
-        .doc(questionId)
-        .update(data: {'answer': answerId});
-  }
+  ) async =>
+      firestore()
+          .collection('users')
+          .doc(userId)
+          .collection('games')
+          .doc(gameId)
+          .collection('questions')
+          .doc(questionId)
+          .update(data: <String, dynamic>{'answer': answerId});
 
   GameState _createGame(DocumentSnapshot snapshot) {
     if (!snapshot.exists) return null;
     final d = snapshot.data();
     if (d.isEmpty) return null;
 
-    final start = d['start'];
-    final end = d['end'];
+    final dynamic start = d['start'];
+    final dynamic end = d['end'];
 
     if (end != null) {
       return GameState.completed(GameCompleted.fromJson(d));

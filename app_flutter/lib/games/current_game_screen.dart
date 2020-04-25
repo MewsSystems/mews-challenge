@@ -14,8 +14,8 @@ class CurrentGameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService authService = Provider.of(context);
-    final GameService gameService = Provider.of(context);
+    final authService = Provider.of<AuthService>(context);
+    final gameService = Provider.of<GameService>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class CurrentGameScreen extends StatelessWidget {
   }
 
   void _onAnswer(BuildContext context, String questionId, String answerId) {
-    final AuthService authService = Provider.of(context);
+    final authService = Provider.of<AuthService>(context);
     Provider.of<GameService>(context).answerQuestion(
       authService.currentUser.uid,
       game.id,

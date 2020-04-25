@@ -32,13 +32,13 @@ class AuthService {
       final result = await auth().signInWithPopup(provider);
 
       await firestore().collection('users').doc(result.user.uid).set(
-        {
+        <String, dynamic>{
           'name': result.user.displayName,
           'email': result.user.email,
         },
         SetOptions(merge: true),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }

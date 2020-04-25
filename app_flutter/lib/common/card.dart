@@ -13,16 +13,14 @@ class MewsCard extends StatelessWidget {
   final EdgeInsetsGeometry margin;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       width: double.infinity,
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color: Color(0xFFFFFFFF),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(8),
       ),
       child: child,
     );
-  }
 }

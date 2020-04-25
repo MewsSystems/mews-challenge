@@ -1,5 +1,7 @@
 import 'package:app_flutter/results/results_bloc.dart';
 import 'package:app_flutter/results/results_state.dart';
+import 'package:app_flutter/results/widgets/header.dart';
+import 'package:app_flutter/results/widgets/result_row.dart';
 import 'package:core/core.dart';
 import 'package:dfunc/dfunc.dart';
 import 'package:flutter/material.dart';
@@ -28,22 +30,11 @@ class _ResultsScreenState extends State<ResultsScreen> {
           padding: const EdgeInsets.all(72),
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 105),
-                child: Row(
-                  children: <Widget>[
-                    const _Logo(),
-                    Text('Leaderboard', style: _headerStyle),
-                  ],
-                ),
-              ),
+              const Header(),
               BlocBuilder<ResultsBloc, ResultsState>(
-                builder: (context, state) => state.match(
+                builder: (_, state) => state.match(
                   (_) => Container(),
-                  (data) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: data.data.map(_buildData).toList(),
-                  ),
+                  (data) => _buildResultsLoaded(data),
                 ),
               ),
             ],
@@ -51,7 +42,12 @@ class _ResultsScreenState extends State<ResultsScreen> {
         ),
       );
 
-  Widget _buildData(ResultsData data) => Expanded(
+  Row _buildResultsLoaded(ResultsLoaded data) => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: data.data.map(_buildResultsData).toList(),
+      );
+
+  Widget _buildResultsData(ResultsData data) => Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -67,71 +63,15 @@ class _ResultsScreenState extends State<ResultsScreen> {
         stream: results,
         initialData: [],
         builder: (context, snapshot) => Column(
-          children: mapIndexed(_buildResult, snapshot.data).toList(),
+          children: mapIndexed(
+            (i, result) => ResultRow(position: i + 1, result: result),
+            snapshot.data,
+          ).toList(),
         ),
       );
-
-  Widget _buildResult(int position, Result result) {
-    final textStyle = _resultStyle.copyWith(fontSize: _textSize(position + 1));
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              '${_formatPosition(position + 1)} ${result.name}',
-              style: textStyle,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              '${result.rightAnswerCount}/${result.questionCount} '
-              '${formatTime(result.end.difference(result.start))}',
-              style: textStyle,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Logo extends StatelessWidget {
-  const _Logo({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(right: 32),
-        child: Image.asset(
-          'assets/logo_big.png',
-          width: 56,
-          height: 75,
-        ),
-      );
-}
-
-String _formatPosition(int position) {
-  if (position == 1) return '🥇';
-  if (position == 2) return '🥈';
-  if (position == 3) return '🥉';
-  return '$position.';
-}
-
-double _textSize(int position) {
-  if (position == 1) return 48;
-  if (position <= 3) return 36;
-  return 24;
 }
 
 const _titleStyle = TextStyle(
   fontSize: 36,
   fontWeight: FontWeight.w500,
 );
-
-const _headerStyle = TextStyle(
-  height: 1.2,
-  fontSize: 48,
-  fontWeight: FontWeight.w500,
-);
-
-const _resultStyle = TextStyle(fontWeight: FontWeight.w500);

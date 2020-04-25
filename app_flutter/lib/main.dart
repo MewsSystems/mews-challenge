@@ -1,9 +1,11 @@
 import 'package:app_flutter/games/game_list_screen.dart';
 import 'package:app_flutter/games/game_screen.dart';
+import 'package:app_flutter/results/results_bloc.dart';
 import 'package:app_flutter/results/results_screen.dart';
 import 'package:core/core.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,6 +16,7 @@ void main() {
     providers: [
       Provider.value(value: authService),
       Provider.value(value: GameService(authService)),
+      Provider.value(value: ResultsService()),
     ],
     child: MyApp(),
   );
@@ -26,8 +29,17 @@ final _router = Router()
     handler: Handler(handlerFunc: (context, params) => GameListScreen()),
   )
   ..define(
-    '/results',
-    handler: Handler(handlerFunc: (context, params) => ResultsScreen()),
+    '/results/:eventId',
+    handler: Handler(
+      handlerFunc: (context, params) {
+        print('handlerFunc');
+        return BlocProvider<ResultsBloc>(
+          create: (_) =>
+              ResultsBloc(Provider.of(context), Provider.of(context)),
+          child: ResultsScreen(eventId: params['eventId'][0]),
+        );
+      },
+    ),
   )
   ..define(
     '/game/:id',

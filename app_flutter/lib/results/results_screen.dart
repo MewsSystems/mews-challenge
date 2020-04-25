@@ -1,88 +1,77 @@
+import 'package:app_flutter/results/results_bloc.dart';
 import 'package:core/core.dart';
+import 'package:dfunc/dfunc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResultsScreen extends StatefulWidget {
+  const ResultsScreen({Key key, @required this.eventId}) : super(key: key);
+
+  final String eventId;
+
   @override
   _ResultsScreenState createState() => _ResultsScreenState();
 }
 
 class _ResultsScreenState extends State<ResultsScreen> {
-  final _resultsService = ResultsService();
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ResultsBloc>(context)
+        .add(ResultsInitialized(widget.eventId));
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(72),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 105),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 32),
-                    child: Image.asset(
-                      'assets/logo_big.png',
-                      width: 56,
-                      height: 75,
-                    ),
-                  ),
-                  Text('Leaderboard', style: _headerStyle),
-                ],
+  Widget build(BuildContext context) => Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(72),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 105),
+                child: Row(
+                  children: <Widget>[
+                    const _Logo(),
+                    Text('Leaderboard', style: _headerStyle),
+                  ],
+                ),
               ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Column(
+              BlocBuilder<ResultsBloc, ResultsState>(
+                builder: (context, state) => state.match(
+                  (_) => Container(),
+                  (data) => Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '💻 Developer game',
-                        style: _titleStyle,
-                      ),
-                      Container(height: 60),
-                      _buildResults(_resultsService.developerResults),
-                    ],
+                    children: data.data.map(_buildData).toList(),
                   ),
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '🖌 Design game',
-                        style: _titleStyle,
-                      ),
-                      Container(height: 60),
-                      _buildResults(_resultsService.designResults),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildData(ResultsData data) => Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(data.game.title, style: _titleStyle),
+            Container(height: 60),
+            _buildResults(data.results),
           ],
         ),
-      ),
-    );
-  }
+      );
 
   Widget _buildResults(Stream<List<Result>> results) =>
       StreamBuilder<List<Result>>(
         stream: results,
         initialData: [],
-        builder: (context, snapshot) {
-          return Column(
-            children: snapshot.data
-                .asMap()
-                .map((i, r) => MapEntry(i, _buildResult(i, r)))
-                .values
-                .toList(),
-          );
-        },
+        builder: (context, snapshot) => Column(
+          children: mapIndexed(
+            (i, r) => _buildResult(i, r),
+            snapshot.data,
+          ).toList(),
+        ),
       );
 
   Widget _buildResult(int position, Result result) {
@@ -108,6 +97,20 @@ class _ResultsScreenState extends State<ResultsScreen> {
       ),
     );
   }
+}
+
+class _Logo extends StatelessWidget {
+  const _Logo({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(right: 32),
+        child: Image.asset(
+          'assets/logo_big.png',
+          width: 56,
+          height: 75,
+        ),
+      );
 }
 
 String _formatPosition(int position) {

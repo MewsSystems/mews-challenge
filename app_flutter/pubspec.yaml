@@ -11,10 +11,13 @@ dependencies:
   after_init: ^0.1.2
   firebase: ^5.0.4
   flutter_html: ^0.11.0
-  provider: ^3.1.0
+  provider: ^4.0.5
   rxdart: ^0.22.2
   universal_html: ^1.1.4
   fluro: ^1.6.3
+  bloc: ^4.0.0
+  flutter_bloc: ^4.0.0
+  dfunc: ^0.3.4
   core:
     path: ../core/
 
@@ -22,6 +25,7 @@ dev_dependencies:
   build_runner: ^1.5.0
   build_web_compilers: ^2.1.0
   pedantic: ^1.7.0
+  dfunc_builder: ^0.0.3
 
 
 flutter:

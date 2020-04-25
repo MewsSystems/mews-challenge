@@ -1,4 +1,3 @@
-import 'package:app_flutter/simple_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,14 +5,6 @@ import 'package:flutter/widgets.dart';
 class ResultsScreen extends StatefulWidget {
   @override
   _ResultsScreenState createState() => _ResultsScreenState();
-
-  static Route<dynamic> route() {
-    return SimpleRoute(
-      name: '/results',
-      title: 'Results',
-      builder: (_) => ResultsScreen(),
-    );
-  }
 }
 
 class _ResultsScreenState extends State<ResultsScreen> {

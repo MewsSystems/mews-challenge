@@ -3,7 +3,6 @@ import 'package:app_flutter/auth/login_screen.dart';
 import 'package:app_flutter/common/screen.dart';
 import 'package:app_flutter/games/completed_game_screen.dart';
 import 'package:app_flutter/games/current_game_screen.dart';
-import 'package:app_flutter/simple_route.dart';
 import 'package:core/core.dart';
 import 'package:firebase/firebase.dart';
 import 'package:flutter/widgets.dart';
@@ -16,14 +15,6 @@ class GameScreen extends StatefulWidget {
 
   @override
   _GameScreenState createState() => _GameScreenState();
-
-  static Route<dynamic> route(String gameId) {
-    return SimpleRoute(
-      name: '/game/$gameId',
-      title: 'Welcome',
-      builder: (_) => GameScreen(gameId: gameId),
-    );
-  }
 }
 
 class _GameScreenState extends State<GameScreen>

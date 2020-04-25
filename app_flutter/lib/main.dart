@@ -1,8 +1,8 @@
 import 'package:app_flutter/games/game_list_screen.dart';
 import 'package:app_flutter/games/game_screen.dart';
 import 'package:app_flutter/results/results_screen.dart';
-import 'package:app_flutter/simple_route.dart';
 import 'package:core/core.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,26 +20,31 @@ void main() {
   runApp(app);
 }
 
+final _router = Router()
+  ..define(
+    '/',
+    handler: Handler(handlerFunc: (context, params) => GameListScreen()),
+  )
+  ..define(
+    '/results',
+    handler: Handler(handlerFunc: (context, params) => ResultsScreen()),
+  )
+  ..define(
+    '/game/:id',
+    handler: Handler(
+      handlerFunc: (context, params) => GameScreen(
+        gameId: params['id'][0],
+      ),
+    ),
+  );
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      onGenerateRoute: (settings) {
-        if (settings.name.startsWith('/game/')) {
-          final String id = settings.name.split('/').last;
-          return GameScreen.route(id);
-        }
-        switch (settings.name) {
-          case '/':
-            return GameListScreen.route();
-          case '/results':
-            return ResultsScreen.route();
-          default:
-            return GameListScreen.route();
-        }
-      },
+      onGenerateRoute: _router.generator,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF101B2C),
         fontFamily: 'Montserrat',
@@ -60,14 +65,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
-
-  static Route<dynamic> route(String gameId) {
-    return SimpleRoute(
-      name: '/game/$gameId',
-      title: 'Welcome',
-      builder: (_) => MyHomePage(title: 'Welcome to $gameId'),
-    );
-  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {

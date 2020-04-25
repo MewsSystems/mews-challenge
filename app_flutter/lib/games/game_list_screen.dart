@@ -4,7 +4,6 @@ import 'package:app_flutter/common/button.dart';
 import 'package:app_flutter/common/card.dart';
 import 'package:app_flutter/common/screen.dart';
 import 'package:app_flutter/games/winner_description.dart';
-import 'package:app_flutter/simple_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -84,14 +83,6 @@ class GameListScreen extends StatelessWidget {
           );
         },
       );
-
-  static Route<dynamic> route() {
-    return SimpleRoute(
-      name: '/',
-      title: 'Test your skills',
-      builder: (_) => GameListScreen(),
-    );
-  }
 }
 
 const _cardTextStyle = TextStyle(

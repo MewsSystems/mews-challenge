@@ -17,17 +17,17 @@ class AuthService {
     await auth().signOut();
   }
 
-  Future<void> loginFacebook() async {
+  Future<User> loginFacebook() async {
     final provider = FacebookAuthProvider();
-    await _doLogin(provider);
+    return _doLogin(provider);
   }
 
-  Future<void> loginGoogle() async {
+  Future<User> loginGoogle() async {
     final provider = GoogleAuthProvider();
-    await _doLogin(provider);
+    return _doLogin(provider);
   }
 
-  Future<void> _doLogin(AuthProvider provider) async {
+  Future<User> _doLogin(AuthProvider provider) async {
     try {
       final result = await auth().signInWithPopup(provider);
 
@@ -38,8 +38,10 @@ class AuthService {
         },
         SetOptions(merge: true),
       );
-    } on Exception catch (e) {
+      return result.user;
+    } catch (e) {
       print(e);
     }
+    return null;
   }
 }

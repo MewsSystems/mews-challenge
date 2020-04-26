@@ -1,4 +1,5 @@
 import 'package:after_init/after_init.dart';
+import 'package:app_flutter/auth/login_bloc.dart';
 import 'package:app_flutter/auth/login_screen.dart';
 import 'package:app_flutter/common/screen.dart';
 import 'package:app_flutter/games/completed_game_screen.dart';
@@ -6,6 +7,7 @@ import 'package:app_flutter/games/current_game_screen.dart';
 import 'package:core/core.dart';
 import 'package:firebase/firebase.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class GameScreen extends StatefulWidget {
@@ -26,8 +28,12 @@ class _GameScreenState extends State<GameScreen>
       stream: authService.user,
       initialData: authService.currentUser,
       builder: (context, snapshot) {
-        final screen =
-            snapshot.hasData ? _buildGameWidget(context) : LoginScreen();
+        final screen = snapshot.hasData
+            ? _buildGameWidget(context)
+            : BlocProvider(
+                create: (_) => LoginBloc(authService),
+                child: LoginScreen(),
+              );
         return Screen(
           children: <Widget>[
             screen,

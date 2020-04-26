@@ -1,9 +1,11 @@
 import 'package:app_flutter/router.dart';
+import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
   initApp();
   final authService = AuthService();
 
@@ -33,4 +35,12 @@ class MewsChallengeApp extends StatelessWidget {
           ),
         ),
       );
+}
+
+class SimpleBlocDelegate extends BlocDelegate {
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
+    super.onTransition(bloc, transition);
+  }
 }

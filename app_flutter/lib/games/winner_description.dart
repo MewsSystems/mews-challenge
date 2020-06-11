@@ -1,9 +1,11 @@
 import 'package:app_flutter/common/card.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:universal_html/html.dart' as html;
 
 class WinnerDescription extends StatelessWidget {
+  const WinnerDescription(this.description, {Key key}) : super(key: key);
+
+  final String description;
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,34 +23,9 @@ class WinnerDescription extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text:
-                              'We will announce the winners (fastest and most '
-                              'accurate) on Saturday at 15:00 at our booth. '
-                              'Winner in each game will get a voucher for one '
-                              'hour of jacuzzi in hotel ',
-                          style: _winnerCardTextStyle,
-                        ),
-                        TextSpan(
-                          text: 'Emblem',
-                          style: _linkTextStyle,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              html.window.open(
-                                'https://www.emblemprague.com/homepage',
-                                '_blank',
-                              );
-                            },
-                        ),
-                        TextSpan(
-                          text: '.',
-                          style: _winnerCardTextStyle,
-                        ),
-                      ],
-                    ),
+                  child: Text(
+                    description,
+                    style: _winnerCardTextStyle,
                   ),
                 ),
               ],

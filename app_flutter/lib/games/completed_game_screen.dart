@@ -1,5 +1,4 @@
 import 'package:app_flutter/games/result_widget.dart';
-import 'package:app_flutter/games/winner_description.dart';
 import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +56,6 @@ class CompletedGameScreen extends StatelessWidget {
           ),
         ),
         ResultWidget(resultType: game.resultType),
-        WinnerDescription(),
       ],
     );
   }

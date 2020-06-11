@@ -13,6 +13,7 @@ void main() {
     providers: [
       Provider.value(value: authService),
       Provider.value(value: GameService(authService)),
+      Provider.value(value: EventService()),
       Provider.value(value: ResultsService()),
     ],
     child: MewsChallengeApp(),
